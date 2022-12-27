@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komponen</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div id="subject">
+   <h1>Daftar Pelajaran</h1>
+    <p>Total selesai : {{completedItems}}</p>
+    <div>
+        <button @click="showForm=!showForm">Toggle Form</button>
+        <div v-show="showForm">     
+            <h3>Add New Data</h3>
+            <form @submit.prevent="submitForm">
+                <div>
+                    <label for="title">Title :</label>
+                    <input type="text" name="title" id="title" placeholder="title">
+                </div>
+                <div>   
+                    <label for="desc">Desc :</label>
+                    <input type="text" name="desc" id="desc" placeholder="desc">
+                </div>
+                <div>
+                    <label for="image">Image :</label>
+                    <input type="text" name="image" id="image" placeholder="image">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div v-for="item in items" class="box" :class="{completed:item.state}">
+        <h2>{{item.title}}</h2>
+        <p>{{item.desc}}</p>
+        <img :src="item.image" alt="image" width="75">
+        <input type="checkbox" :checked="item.state" @change="item.state = !item.state">
+    </div>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+   Vue.createApp({
+        data(){
+            return {
+                showForm:false,
+                items:[
+                    {title:"Vue", desc:"What a green", image:"Vue.png", state:false},
+                    {title:"React", desc:"Blue from facebook", image:"react.png", state:false}
+                ]
+            }
+        },
+        methods:{
+            submitForm(event){
+                const els=event.target.elements
+
+                let title=els.title.value
+                let desc=els.desc.value
+                let image=els.image.value
+
+                this.items.push({title, desc, image, state:false})
+
+                this.showForm=false
+            }
+        },
+        computed:{
+            completedItems(){
+                return this.items.filter((item) => item.state == true).length
+            }
+        }
+   }).mount("#subject");
+</script>
+</body>
+</html>

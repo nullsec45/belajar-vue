@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="vueApp">
+    <input type="text" v-model="subject">
+    <h1>Belajar {{subject}}</h1>
+    <button v-on:click="makeItFun()">Make it Fun</button>
+    <button v-on:click="check()">Check Subject</button>
+
+    <p>Nilai {{score}}</p>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const sample={
+        data(){
+            return {
+                subject:"VueJS",
+                score:0
+            }
+        },
+        methods:{
+            makeItFun(){
+                this.subject=this.subject+" !!!!!"
+            },
+            check(){
+                if(this.subject === "VueJS"){
+                    this.score=100
+                }else{
+                    this.score=-50
+                }
+            }
+        }
+    }
+    Vue.createApp(sample).mount("#vueApp")
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komponen</title>
+</head>
+<body>
+<div id="vueApp">
+    <h1>Belajar Vue JS</h1>
+    <blog-post title="Belajar Vue JS cuy" desc="this is first blogpost."></blog-post>
+    <blog-post title="Blogging with Vue JS"></blog-post>
+    <blog-post title="Vue Mantap ngab"></button-post>
+</div>
+<script type="text/x-template" id="blog-template">
+    <h3> {{title}} </h3>
+    <p>{{desc}}</p> 
+</script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app=Vue.createApp({});
+
+    app.component("blog-post",{
+        data(){
+            return {
+                count:0
+            }
+        },
+        props:["title","desc"]
+    });
+
+    app.mount("#vueApp");
+</script>
+</body>
+</html>

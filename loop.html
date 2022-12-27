@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="vueApp">
+    <h1>looping di Vue JS</h1>
+    <ul>
+        <li v-for="subject in subjects" :key="subject.title">
+            {{subject.title}} - {{subject.type}}
+        </li>
+    </ul>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const sample={
+        data(){
+            return {
+                subjects:[
+                    {title:"Javascript",type:"Native"},
+                    {title:"Vue", type:"Framework"},
+                    {title:"React", type:"Framework"},
+                    {title:"Angular", type:"Framework"},
+                ],
+            }
+        },
+        methods:{
+            makeItFun(){
+                this.subject=this.subject+" !!!!!"
+            },
+            check(){
+                if(this.subject === "VueJS"){
+                    this.score=100
+                }else{
+                    this.score=-50
+                }
+            }
+        }
+    }
+    Vue.createApp(sample).mount("#vueApp")
+</script>
+</body>
+</html>
